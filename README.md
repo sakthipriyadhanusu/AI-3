@@ -13,34 +13,32 @@ For each neighbor node, check node is not in visited then add node to visited an
 Creating loop to print the visited node.
 Call the bfs function by passing arguments visited, graph and starting node.
 Stop the program.
+
 # Program:
-graph = { 
-  '5' : ['3','7'], 
-  '3' : ['2', '4'], 
-  '7' : ['8'], 
-  '2' : [], 
-  '4' : ['8'], 
-  '8' : [] 
-} 
-visited = [] # List for visited nodes. 
-queue = []     #Initialize a queue 
- 
-def bfs(visited, graph, node): #function for BFS 
-  visited.append(node) 
-  queue.append(node) 
-  while queue:          # Creating loop to visit each node 
-    m = queue.pop(0)  
-    print (m, end = " ")  
-    for neighbour in graph[m]: 
-      if neighbour not in visited: 
-        visited.append(neighbour) 
-        queue.append(neighbour) 
- 
-# Driver Code 
-print("Following is the Breadth-First Search") 
-bfs(visited, graph, '5')    # function calling
+```
+import math
+def minimax (curDepth, nodeIndex, maxTurn, scores,targetDepth):
+    # base case : targetDepth reached
+    if (curDepth == targetDepth):
+        return scores[nodeIndex]
+    if (maxTurn):
+        return max(minimax(curDepth + 1, nodeIndex * 2,False, scores, targetDepth),
+                   minimax(curDepth + 1, nodeIndex * 2 + 1,
+                    False, scores, targetDepth))
+     
+    else:
+        return min(minimax(curDepth + 1, nodeIndex * 2, True, scores, targetDepth),
+                   minimax(curDepth + 1, nodeIndex * 2 + 1,
+                     True, scores, targetDepth))
+     
+# Driver code
+scores = [3, 5, 2, 9, 12, 5, 23, 20]
+treeDepth = math.log(len(scores), 2) # calculate depth of node  log 8 (base 2) = 3)
+print("The optimal value is : ", end = "")
+print(minimax(0, 0, True, scores,treeDepth))
+```
 # Output:
-![image](https://github.com/user-attachments/assets/ad85df46-cb56-4519-b3ea-5ca60549e137)
+![image](https://github.com/user-attachments/assets/358fef5b-f306-4fb5-8f63-204ac7aeeae2)
 
 # Result:
 Thus the breadth first search order was found sucessfully.
